@@ -109,7 +109,6 @@ Este é um MVP (Minimum Viable Product) para um sistema de gerenciamento de clie
    ```
 
 ---
-![alt text](image_2025-04-13_02-48-09.png)
 ## 📡 Endpoints da API
 
 ### 🧑‍💼 Clientes
@@ -226,3 +225,6 @@ Este é um MVP (Minimum Viable Product) para um sistema de gerenciamento de clie
 | data_compra  | DateTime     | Data e hora da compra                      |
 
 ---
+## Fluxograma da Arquitetura da API:
+---
+![alt text](image_2025-04-13_02-48-09.png)
