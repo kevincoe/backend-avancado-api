@@ -79,8 +79,8 @@ Este é um MVP (Minimum Viable Product) para um sistema de gerenciamento de clie
 2. **Crie e ative o ambiente virtual:**
 
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate
+   python3 -m venv backend-api
+   source backend-api/bin/activate
    ```
 
 3. **Construa e inicie os contêineres:**
@@ -88,9 +88,13 @@ Este é um MVP (Minimum Viable Product) para um sistema de gerenciamento de clie
    ```bash
    docker-compose up --build -d
    ```
-   **Para encerrar os contêineres**
+   **Para encerrar os contêineres:**
    ```bash
    docker-compose down
+   ```
+      **Para rodar os contêineres:**
+   ```bash
+   docker run backend-avancado-api_api
    ```
 
 ---
