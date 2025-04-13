@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Gerente Banco",
+    "description": "✨ API para gerenciamento de clientes de um banco e investimentos ✨",
+    "version": "1.0.0"
+  },
+  "basePath": "/api",
+  "paths": {
+    "/clientes": {
+      "get": {
+        "summary": "Listar todos os clientes",
+        "responses": {
+          "200": {
+            "description": "✅ Lista de clientes retornada com sucesso."
+          },
+          "404": {
+            "description": "❌ Nenhum cliente encontrado."
+          },
+          "500": {
+            "description": "⚠️ Erro interno no servidor."
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar um novo cliente",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "cliente",
+            "description": "✏️ Dados do cliente a ser criado.",
+            "schema": {
+              "$ref": "#/definitions/Cliente"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "✅ Cliente criado com sucesso."
+          },
+          "400": {
+            "description": "❌ Dados inválidos fornecidos."
+          },
+          "500": {
+            "description": "⚠️ Erro interno no servidor."
+          }
+        }
+      }
+    },
+    "/clientes/{id}": {
+      "get": {
+        "summary": "Obter um cliente pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente a ser buscado."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Dados do cliente retornados com sucesso."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          },
+          "500": {
+            "description": "⚠️ Erro interno no servidor."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Atualizar um cliente pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente a ser atualizado."
+          },
+          {
+            "in": "body",
+            "name": "cliente",
+            "description": "✏️ Dados atualizados do cliente.",
+            "schema": {
+              "$ref": "#/definitions/Cliente"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Cliente atualizado com sucesso."
+          },
+          "400": {
+            "description": "❌ Dados inválidos fornecidos."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          },
+          "500": {
+            "description": "⚠️ Erro interno no servidor."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover um cliente pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente a ser removido."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "✅ Cliente removido com sucesso."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          },
+          "500": {
+            "description": "⚠️ Erro interno no servidor."
+          }
+        }
+      }
+    },
+    "/clientes/{cliente_id}/investimentos": {
+      "get": {
+        "summary": "Listar investimentos do cliente",
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Lista de investimentos retornada com sucesso."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          }
+        }
+      }
+    },
+    "/clientes/{cliente_id}/investimentos/carteira": {
+      "get": {
+        "summary": "Obter valor atual da carteira de investimentos",
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Valor da carteira calculado com sucesso."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          }
+        }
+      }
+    },
+    "/clientes/{cliente_id}/investimentos/acoes": {
+      "post": {
+        "summary": "Comprar ações para o cliente",
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente"
+          },
+          {
+            "in": "body",
+            "name": "investimento",
+            "description": "✏️ Dados da compra de ações",
+            "schema": {
+              "$ref": "#/definitions/CompraAcao"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "✅ Ações compradas com sucesso."
+          },
+          "400": {
+            "description": "❌ Dados inválidos ou saldo insuficiente."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          }
+        }
+      }
+    },
+    "/clientes/{cliente_id}/investimentos/dolar": {
+      "post": {
+        "summary": "Comprar dólares para o cliente",
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do cliente"
+          },
+          {
+            "in": "body",
+            "name": "investimento",
+            "description": "✏️ Dados da compra de dólares",
+            "schema": {
+              "$ref": "#/definitions/CompraDolar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "✅ Dólares comprados com sucesso."
+          },
+          "400": {
+            "description": "❌ Dados inválidos ou saldo insuficiente."
+          },
+          "404": {
+            "description": "❌ Cliente não encontrado."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "description": "Nome do cliente."
+        },
+        "agencia": {
+          "type": "string",
+          "description": "Agência do cliente."
+        },
+        "conta": {
+          "type": "string",
+          "description": "Conta do cliente."
+        },
+        "nivel": {
+          "type": "string",
+          "description": "Nível do cliente (bronze, prata, ouro, diamante)."
+        },
+        "produtos": {
+          "type": "string",
+          "description": "Produtos associados ao cliente."
+        },
+        "saldo": {
+          "type": "number",
+          "format": "float",
+          "description": "Saldo da conta do cliente em reais (BRL)."
+        }
+      },
+      "required": ["nome", "agencia", "conta", "saldo"]
+    },
+    "CompraAcao": {
+      "type": "object",
+      "properties": {
+        "simbolo": {
+          "type": "string",
+          "description": "Símbolo da ação (ex: PETR4, ITUB4)"
+        },
+        "quantidade": {
+          "type": "number",
+          "format": "float",
+          "description": "Quantidade de ações a comprar"
+        }
+      },
+      "required": ["simbolo", "quantidade"]
+    },
+    "CompraDolar": {
+      "type": "object",
+      "properties": {
+        "quantidade": {
+          "type": "number",
+          "format": "float",
+          "description": "Quantidade de dólares a comprar"
+        }
+      },
+      "required": ["quantidade"]
+    },
+    "Investimento": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID do investimento"
+        },
+        "cliente_id": {
+          "type": "integer",
+          "description": "ID do cliente"
+        },
+        "tipo": {
+          "type": "string",
+          "description": "Tipo de investimento (acao ou moeda)"
+        },
+        "simbolo": {
+          "type": "string",
+          "description": "Símbolo da ação ou moeda"
+        },
+        "quantidade": {
+          "type": "number",
+          "format": "float",
+          "description": "Quantidade adquirida"
+        },
+        "preco_compra": {
+          "type": "number",
+          "format": "float",
+          "description": "Preço unitário na compra"
+        },
+        "data_compra": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data e hora da compra"
+        }
+      }
+    }
+  }
+}
