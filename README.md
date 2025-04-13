@@ -109,7 +109,7 @@ Este é um MVP (Minimum Viable Product) para um sistema de gerenciamento de clie
    ```
 
 ---
-
+![alt text](image_2025-04-13_02-48-09.png)
 ## 📡 Endpoints da API
 
 ### 🧑‍💼 Clientes
